@@ -13,79 +13,83 @@ class Tasks_model extends CI_Model  {
         $number = count($tasks->result_array());
         $tasks = $tasks->result();
         
-        switch ($name) {
-            case 'status':
-                $array = array();
-                foreach($tasks as $row){
-                    array_push($array, $row->status);
-                }
-                
-                $this->db->where_in('id', $array);
-                $this->db->order_by('name', 'DESC');
-                $status = $this->db->get('status');
-                return $status->result();
-                
-                break;
-            case 'prioritate':
-                $array = array();
-                foreach($tasks as $row){
-                    array_push($array, $row->prioritate);
-                }
-                
-                $this->db->where_in('id', $array);
-                $this->db->order_by('name', 'DESC');
-                $prioritate = $this->db->get('prioritate');
-                return $prioritate->result();
-                
-                break;
-            case 'lieta':
-                $array = array();
-                foreach($tasks as $row){
-                    array_push($array, $row->lieta);
-                }
-                
-                $this->db->where_in('id', $array);
-                $this->db->order_by('name', 'DESC');
-                $lieta = $this->db->get('lieta');
-                return $lieta->result();
-                
-                break;
-            case 'clients':
-                $array = array();
-                foreach($tasks as $row){
-                    array_push($array, $row->klients);
-                }
-                
-                $this->db->where_in('id', $array);
-                $this->db->order_by('name', 'DESC');
-                $klients = $this->db->get('clients');
-                return $klients->result();
-                
-                break;
-            case 'sadala':
-                $array = array();
-                foreach($tasks as $row){
-                    array_push($array, $row->sadala);
-                }
-                
-                $this->db->where_in('id', $array);
-                $this->db->order_by('name', 'DESC');
-                $sadala = $this->db->get('sadala');
-                return $sadala->result();
-                
-                break;
-            default:
-                $result = array(
-                                'status' => $this->getTaskFilter('status'),
-                                'prioritate' => $this->getTaskFilter('prioritate'),
-                                'lieta' => $this->getTaskFilter('lieta'),
-                                'clients' => $this->getTaskFilter('clients'),
-                                'sadala' => $this->getTaskFilter('sadala')
-                                );
-                
-                return $result;
-                break;
-        } 
+        if($tasks){
+            switch ($name) {
+                case 'status':
+                    $array = array();
+                    foreach($tasks as $row){
+                        array_push($array, $row->status);
+                    }
+                    
+                    $this->db->where_in('id', $array);
+                    $this->db->order_by('name', 'DESC');
+                    $status = $this->db->get('status');
+                    return $status->result();
+                    
+                    break;
+                case 'prioritate':
+                    $array = array();
+                    foreach($tasks as $row){
+                        array_push($array, $row->prioritate);
+                    }
+                    
+                    $this->db->where_in('id', $array);
+                    $this->db->order_by('name', 'DESC');
+                    $prioritate = $this->db->get('prioritate');
+                    return $prioritate->result();
+                    
+                    break;
+                case 'lieta':
+                    $array = array();
+                    foreach($tasks as $row){
+                        array_push($array, $row->lieta);
+                    }
+                    
+                    $this->db->where_in('id', $array);
+                    $this->db->order_by('name', 'DESC');
+                    $lieta = $this->db->get('lieta');
+                    return $lieta->result();
+                    
+                    break;
+                case 'clients':
+                    $array = array();
+                    foreach($tasks as $row){
+                        array_push($array, $row->klients);
+                    }
+                    
+                    $this->db->where_in('id', $array);
+                    $this->db->order_by('name', 'DESC');
+                    $klients = $this->db->get('clients');
+                    return $klients->result();
+                    
+                    break;
+                case 'sadala':
+                    $array = array();
+                    foreach($tasks as $row){
+                        array_push($array, $row->sadala);
+                    }
+                    
+                    $this->db->where_in('id', $array);
+                    $this->db->order_by('name', 'DESC');
+                    $sadala = $this->db->get('sadala');
+                    return $sadala->result();
+                    
+                    break;
+                default:
+                    $result = array(
+                                    'status' => $this->getTaskFilter('status'),
+                                    'prioritate' => $this->getTaskFilter('prioritate'),
+                                    'lieta' => $this->getTaskFilter('lieta'),
+                                    'clients' => $this->getTaskFilter('clients'),
+                                    'sadala' => $this->getTaskFilter('sadala')
+                                    );
+                    
+                    return $result;
+                    break;
+            } 
+        }else{
+            return false;
+        }    
     }
 
     public function insert_task($data, $main_user, $users)
@@ -186,11 +190,11 @@ class Tasks_model extends CI_Model  {
         $this->db->select('sa.name AS sadala_name, sa.id AS sadala_id, cl.name AS clients_name, cl.id AS clients_id');
         $this->db->select('li.name AS lieta_name, li.id AS lieta_id, pr.name AS pr_name, pr.id AS pr_id');
         $this->db->from('tasks AS t');
-        $this->db->join('status AS st', 'st.id = t.status', 'left');
-        $this->db->join('sadala AS sa', 'sa.id = t.sadala', 'left');
-        $this->db->join('clients AS cl', 'cl.id = t.klients', 'left');
-        $this->db->join('lieta AS li', 'li.id = t.lieta', 'left');
-        $this->db->join('prioritate AS pr', 'pr.id = t.prioritate', 'left');
+        $this->db->join('status_dump AS st', 'st.id = t.status', 'left');
+        $this->db->join('sadala_dump AS sa', 'sa.id = t.sadala', 'left');
+        $this->db->join('clients_dump AS cl', 'cl.id = t.klients', 'left');
+        $this->db->join('lieta_dump AS li', 'li.id = t.lieta', 'left');
+        $this->db->join('prioritate_dump AS pr', 'pr.id = t.prioritate', 'left');
         $result = $this->db->get();
         //return $result->result();
 
@@ -235,11 +239,11 @@ class Tasks_model extends CI_Model  {
             $this->db->select('sa.name AS sadala_name, cl.name AS clients_name');
             $this->db->select('li.name AS lieta_name, pr.name AS pr_name');
             $this->db->from('tasks AS t');
-            $this->db->join('status AS st', 'st.id = t.status', 'left');
-            $this->db->join('sadala AS sa', 'sa.id = t.sadala', 'left');
-            $this->db->join('clients AS cl', 'cl.id = t.klients', 'left');
-            $this->db->join('lieta AS li', 'li.id = t.lieta', 'left');
-            $this->db->join('prioritate AS pr', 'pr.id = t.prioritate', 'left');
+            $this->db->join('status_dump AS st', 'st.id = t.status', 'left');
+            $this->db->join('sadala_dump AS sa', 'sa.id = t.sadala', 'left');
+            $this->db->join('clients_dump AS cl', 'cl.id = t.klients', 'left');
+            $this->db->join('lieta_dump AS li', 'li.id = t.lieta', 'left');
+            $this->db->join('prioritate_dump AS pr', 'pr.id = t.prioritate', 'left');
             $result = $this->db->get();
 
             return $result->result();
@@ -260,7 +264,7 @@ class Tasks_model extends CI_Model  {
         $this->db->where('task_users.task_id', $id);
         //$this->db->select('users.first_name', 'users.last_name');
         $this->db->from('task_users');
-        $this->db->join('users', 'task_users.user_id = users.id', 'left');
+        $this->db->join('users_dump', 'task_users.user_id = users_dump.id', 'left');
         $query = $this->db->get();
 
         if($type == 1){

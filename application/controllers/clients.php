@@ -57,7 +57,7 @@ class Clients extends CI_Controller {
                                      'email' => $this->input->post('email'),
                                      'person' => $this->input->post('persona')
                                     );
-                if($this->main->update('clients', $id, $client_data)){
+                if($this->main->update('clients', $id, $client_data) && $this->main->update('clients', $id, $client_data)){
                     $data['success'] = "Saglabats!";
                 }
 
@@ -104,9 +104,19 @@ class Clients extends CI_Controller {
                                      'email' => $this->input->post('email'),
                                      'person' => $this->input->post('persona')
                                     );
-                if($this->main->insert('clients', $client_data)){
+                
+                    $client_data_dump = array(
+                                     'id' => $this->main->insert('clients', $client_data),
+                                     'name' => $this->input->post('client'),
+                                     'reg_nr' => $this->input->post('reg_nr'),
+                                     'adress' => $this->input->post('adress'),
+                                     'phone' => $this->input->post('phone'),
+                                     'email' => $this->input->post('email'),
+                                     'person' => $this->input->post('persona')
+                                    );
+                    $this->main->insert('clients_dump', $client_data_dump);
                     redirect('clients');
-                }
+                
 
             }else{
                 if(!empty($_POST)){

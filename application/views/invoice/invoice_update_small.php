@@ -198,7 +198,7 @@
        $("#klients").change(klients);
         
        function klients() {
-            $("#clients").load('/invoice/ajax_clients/'+$("#klients").val());
+            $("#clients").load('<?= base_url(); ?>invoice/ajax_clients/'+$("#klients").val());
         }
     
         function getNumbering() {
@@ -274,7 +274,7 @@
             $('.first_').clone().removeClass('first_').removeClass('hidden').insertBefore(".copy_before");
             getNumbering();
             getSumValue_('p_total_price');
-            $("#clients").load('/invoice/ajax_clients/'+$("#klients").val());
+            $("#clients").load('<?= base_url(); ?>invoice/ajax_clients/'+$("#klients").val());
         })
         
     </script>    

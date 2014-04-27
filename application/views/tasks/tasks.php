@@ -78,7 +78,7 @@
                             </span>
                         </td>
             			<td>
-                        <?
+                        <? 
                         if($this->tasks_model->task_users($row->id)){ 
                             foreach($this->tasks_model->task_users($row->id) as $k=>$v){
                                 echo '<span class="label label-default">'.$v['first_name'].' '.$v['last_name'].'</span><br />';   

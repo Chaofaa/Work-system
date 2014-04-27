@@ -55,7 +55,7 @@ class Invoice extends CI_Controller {
             $data['user'] = $this->ion_auth->user()->row();
             
             $data['page']['title'] = 'Isais reķins';
-            $data['klients'] = $this->main->getAll('clients');
+            $data['klients'] = $this->main->getAll('clients_dump');
             
             if($type == 'klientam'){
                 $data['filter_data'] = $this->session->userdata('klientiem');
@@ -102,7 +102,7 @@ class Invoice extends CI_Controller {
             $data['user'] = $this->ion_auth->user()->row();
             
             $data['page']['title'] = 'Garais reķins';
-            $data['klients'] = $this->main->getAll('clients', array('by' => 'name', 'order' => 'desc'));
+            $data['klients'] = $this->main->getAll('clients_dump', array('by' => 'name', 'order' => 'desc'));
             
             if($type == 'all'){
                 $data['filter_data'] = $this->session->userdata('a_filter');
@@ -133,7 +133,7 @@ class Invoice extends CI_Controller {
             $data['user'] = $this->ion_auth->user()->row();
             
             $data['page']['title'] = 'Garais reķins';
-            $data['klients'] = $this->main->getAll('clients', array('by' => 'id', 'order' => 'desc'));
+            $data['klients'] = $this->main->getAll('clients_dump', array('by' => 'id', 'order' => 'desc'));
             
             $data['data'] = $this->main->getDataById('invoice',  $id);
             $data['data_list'] = $this->invoice_model->listData($id);
@@ -162,7 +162,7 @@ class Invoice extends CI_Controller {
             $data['user'] = $this->ion_auth->user()->row();
             
             $data['page']['title'] = 'Isais reķins';
-            $data['klients'] = $this->main->getAll('clients', array('by' => 'name', 'order' => 'desc'));
+            $data['klients'] = $this->main->getAll('clients_dump', array('by' => 'name', 'order' => 'desc'));
             
             $data['data'] = $this->main->getDataById('invoice',  $id);
             $data['data_list'] = $this->invoice_model->listData($id);
@@ -242,8 +242,8 @@ class Invoice extends CI_Controller {
             $this->error();
         }else{
 
-            $data['klients'] = $this->main->getDataById('clients', $id);
-            $this->load->view('klients/ajax_klients.php', $data);
+            $data['klients'] = $this->main->getDataById('clients_dump', $id);
+            $this->load->view('clients/ajax_klients.php', $data);
 
         }    
     } 

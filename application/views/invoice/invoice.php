@@ -60,7 +60,7 @@
                         <td><?= (($v->status == 1)?'Aktivs':'Pabeigts'); ?></td>
                         <td>
                             <a href="<?= base_url(); ?>invoice/<?= (($v->tips == 1)?'pdfBig':'pdfSmall') ?>/<?= $v->id; ?>" class="tip_link" style="margin-left:10px;" data-toggle="tooltip" data-placement="top" title="Create PDF"><img src="<?= base_url(JADMIN_IMAGES) ?>/system/pdf.png" width="17" /></a>
-                            <a href="<?= base_url(); ?>invoice/updateBig/<?= $v->id; ?>" class="tip_link" style="margin-left:10px;" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil" ></span></a>
+                            <a href="<?= base_url(); ?>invoice/<?= (($v->tips == 1)?'updateBig':'updateSmall') ?>/<?= $v->id; ?>" class="tip_link" style="margin-left:10px;" data-toggle="tooltip" data-placement="top" title="Edit"><span class="glyphicon glyphicon-pencil" ></span></a>
                             <a href="javascript:;" class="tip_link delete" onclick="check('<?= base_url(); ?>invoice/delete/<?= $v->id; ?>')" style="margin-left:10px;" data-toggle="tooltip" data-placement="top" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>

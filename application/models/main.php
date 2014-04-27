@@ -33,7 +33,7 @@ class Main extends CI_Model  {
     public function insert($table, $array)
     {
     	$query = $this->db->insert($table, $array);
-    	return $query;
+    	return $this->db->insert_id();
     }
 
     public function delete($table, $id)

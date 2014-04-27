@@ -849,6 +849,18 @@ class Ion_auth_model extends CI_Model
 		$this->db->insert($this->tables['users'], $user_data);
 
 		$id = $this->db->insert_id();
+		$data = array(
+			'id' => $id,
+		    'username'   => $username,
+		    'password'   => $password,
+		    'email'      => $email,
+		    'ip_address' => $ip_address,
+		    'created_on' => time(),
+		    'last_login' => time(),
+		    'active'     => ($manual_activation === false ? 1 : 0)
+		);
+		$user_data_dump = array_merge($this->_filter_data($this->tables['users'], $additional_data), $data);
+		$this->db->insert('users_dump', $user_data_dump);
 
 		if (!empty($groups))
 		{
@@ -1501,6 +1513,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 		$this->db->update($this->tables['users'], $data, array('id' => $user->id));
+		$this->db->update('users_dump', $data, array('id' => $user->id));
 
 		if ($this->db->trans_status() === FALSE)
 		{
@@ -1533,9 +1546,6 @@ class Ion_auth_model extends CI_Model
 		// remove user from groups
 		$this->remove_from_group(NULL, $id);
 
-		//delete user from `task_users`
-		$this->db->where('user_id', $id);
-		$this->db->delete('task_users');
 
 		// delete user from users table should be placed after remove from group
 		$this->db->delete($this->tables['users'], array('id' => $id));

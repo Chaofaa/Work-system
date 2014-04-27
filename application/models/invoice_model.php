@@ -43,7 +43,7 @@ class Invoice_model extends CI_Model  {
         $this->db->order_by('rek_datums', 'DESC');
         $this->db->select('i.*, c.name AS client_name');
         $this->db->from('invoice AS i');
-        $this->db->join('clients AS c', 'c.id = i.klients', 'left');
+        $this->db->join('clients_dump AS c', 'c.id = i.klients', 'left');
         $result = $this->db->get();
         return $result->result();
     }
@@ -167,7 +167,7 @@ class Invoice_model extends CI_Model  {
         $invoice = $this->db->get('invoice');
         $invoice = $invoice->result();
         
-    
+        if($invoice){
             $array = array();
             foreach($invoice as $row){
                 array_push($array, $row->klients);
@@ -178,6 +178,9 @@ class Invoice_model extends CI_Model  {
             $result = $this->db->get('clients');
             //return $result->result();
             return $result->result();
+        }else{
+            return false;
+        }    
     }
 
 

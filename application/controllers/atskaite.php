@@ -18,8 +18,9 @@ class Atskaite extends CI_Controller {
         }
         
         $data['user'] = $this->ion_auth->user()->row();
-        
-        $data['filter'] = $this->atskaite_model->getAtskaitesFilter();
+        if($this->atskaite_model->getAtskaitesFilter()){
+            $data['filter'] = $this->atskaite_model->getAtskaitesFilter();
+        }    
         $data['filter_data'] = $this->session->userdata('a_filter');
         $data['atskaite'] = $this->atskaite_model->getAtskaites();
  

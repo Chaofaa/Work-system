@@ -50,6 +50,7 @@ class Lieta extends CI_Controller {
                                     'info'=> $this->input->post('comment')
                                     );
                 if($this->main->update('lieta', $id, $lieta_data)){
+                    $this->main->update('lieta_dump', $id, $lieta_data);
                     $data['success'] = "Saglabats";
                 }
             }else{
@@ -84,12 +85,16 @@ class Lieta extends CI_Controller {
             $this->form_validation->set_rules('comment', 'Comment', 'xss_clean');
 
             if ($this->form_validation->run() == true){
-                $lieta_data = array('name' => $this->input->post('name'),
+                    $lieta_data = array('name' => $this->input->post('name'),
                                     'info'=> $this->input->post('comment')
                                     );
-                if($this->main->insert('lieta', $lieta_data)){
+                    $lieta_data_dump = array(
+                                    'id' => $this->main->insert('lieta', $lieta_data),
+                                    'name' => $this->input->post('name'),
+                                    'info'=> $this->input->post('comment')
+                                    );
+                    $this->main->insert('lieta_dump', $lieta_data_dump);
                     redirect('lieta');
-                }
             }else{
                 if(!empty($_POST)){
                     $data['error'] = "Aizpildet visus obligatus laukus!";

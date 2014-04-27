@@ -88,7 +88,7 @@
         	<tbody>
                     <? $i = 0; ?>
                     <? if($atskaite){ ?>
-                        <?  foreach($atskaite as $row){ ?>
+                        <? foreach($atskaite as $row){ ?>
                         <tr class="select" rel="<?= $row->id; ?>">
                             <td><?= $this->main->Date($row->datums); ?></td>
                             <td><?= $row->first_name ?>&nbsp;<?= $row->last_name; ?></td>

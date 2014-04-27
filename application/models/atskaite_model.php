@@ -54,10 +54,10 @@ class Atskaite_model extends CI_Model  {
         $this->db->select('SUM(u.time) AS total_time');
         $this->db->from('uzskaite AS u');
         $this->db->group_by('u.id');
-        $this->db->join('users AS us', 'us.id = u.darbinieks', 'left');
-        $this->db->join('sadala AS sa', 'sa.id = u.sadala', 'left');
-        $this->db->join('clients AS cl', 'cl.id = u.klients', 'left');
-        $this->db->join('lieta AS li', 'li.id = u.lieta', 'left');
+        $this->db->join('users_dump AS us', 'us.id = u.darbinieks', 'left');
+        $this->db->join('sadala_dump AS sa', 'sa.id = u.sadala', 'left');
+        $this->db->join('clients_dump AS cl', 'cl.id = u.klients', 'left');
+        $this->db->join('lieta_dump AS li', 'li.id = u.lieta', 'left');
         $result = $this->db->get();
 
         if($result->num_rows() > 0){
@@ -97,10 +97,10 @@ class Atskaite_model extends CI_Model  {
         $this->db->select('SUM(u.time) AS total_time');
         $this->db->group_by('u.klients');
         $this->db->from('uzskaite AS u');
-        $this->db->join('users AS us', 'us.id = u.darbinieks', 'left');
-        $this->db->join('sadala AS sa', 'sa.id = u.sadala', 'left');
-        $this->db->join('clients AS cl', 'cl.id = u.klients', 'left');
-        $this->db->join('lieta AS li', 'li.id = u.lieta', 'left');
+        $this->db->join('users_dump AS us', 'us.id = u.darbinieks', 'left');
+        $this->db->join('sadala_dump AS sa', 'sa.id = u.sadala', 'left');
+        $this->db->join('clients_dump AS cl', 'cl.id = u.klients', 'left');
+        $this->db->join('lieta_dump AS li', 'li.id = u.lieta', 'left');
         $result = $this->db->get();
 
         if($result->num_rows() > 0){
@@ -141,10 +141,10 @@ class Atskaite_model extends CI_Model  {
         $this->db->select('COUNT(DISTINCT u.datums) AS total_days');
         $this->db->group_by('u.darbinieks');
         $this->db->from('uzskaite AS u');
-        $this->db->join('users AS us', 'us.id = u.darbinieks', 'left');
-        $this->db->join('sadala AS sa', 'sa.id = u.sadala', 'left');
-        $this->db->join('clients AS cl', 'cl.id = u.klients', 'left');
-        $this->db->join('lieta AS li', 'li.id = u.lieta', 'left');
+        $this->db->join('users_dump AS us', 'us.id = u.darbinieks', 'left');
+        $this->db->join('sadala_dump AS sa', 'sa.id = u.sadala', 'left');
+        $this->db->join('clients_dump AS cl', 'cl.id = u.klients', 'left');
+        $this->db->join('lieta_dump AS li', 'li.id = u.lieta', 'left');
         $result = $this->db->get();
 
         if($result->num_rows() > 0){
@@ -163,38 +163,43 @@ class Atskaite_model extends CI_Model  {
         $atskaite = $this->db->get('uzskaite');
         $atskaite = $atskaite->result();
         
-        if($name == 'klients'){
-            $array = array();
-            foreach($atskaite as $row){
-                array_push($array, $row->$name);
-            }
+        if($atskaite){
 
-            $this->db->where_in('id', $array);
-            $this->db->order_by('id', 'DESC');
-            $result = $this->db->get('clients');
-            return $result->result();
-        }elseif($name == 'darbinieks'){
-            $array = array();
-            foreach($atskaite as $row){
-                array_push($array, $row->$name);
-            }
+            if($name == 'klients'){
+                $array = array();
+                foreach($atskaite as $row){
+                    array_push($array, $row->$name);
+                }
 
-            $this->db->where_in('id', $array);
-            $this->db->order_by('first_name', 'DESC');
-            $result = $this->db->get('users');
-            return $result->result();
+                $this->db->where_in('id', $array);
+                $this->db->order_by('id', 'DESC');
+                $result = $this->db->get('clients');
+                return $result->result();
+            }elseif($name == 'darbinieks'){
+                $array = array();
+                foreach($atskaite as $row){
+                    array_push($array, $row->$name);
+                }
+
+                $this->db->where_in('id', $array);
+                $this->db->order_by('first_name', 'DESC');
+                $result = $this->db->get('users');
+                return $result->result();
+            }else{
+                $array = array();
+                foreach($atskaite as $row){
+                    array_push($array, $row->$name);
+                }
+
+                $this->db->where_in('id', $array);
+                $this->db->order_by('name', 'DESC');
+                $result = $this->db->get($name);
+                //return $result->result();
+                return $result->result();
+            }
         }else{
-            $array = array();
-            foreach($atskaite as $row){
-                array_push($array, $row->$name);
-            }
-
-            $this->db->where_in('id', $array);
-            $this->db->order_by('name', 'DESC');
-            $result = $this->db->get($name);
-            //return $result->result();
-            return $result->result();
-        }
+            return false;
+        }    
     }
     
     public function getAtskaitesFilter()
