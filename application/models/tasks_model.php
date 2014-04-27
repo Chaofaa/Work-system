@@ -182,9 +182,9 @@ class Tasks_model extends CI_Model  {
         $this->db->order_by('add_date', 'DESC');
         $this->db->distinct();
         $this->db->select('t.name, t.uzdevums, t.izpildes_gaita, t.add_date');
-        $this->db->select('t.id, t.privats, t.termins, st.name AS status_name');
-        $this->db->select('sa.name AS sadala_name, cl.name AS clients_name');
-        $this->db->select('li.name AS lieta_name, pr.name AS pr_name');
+        $this->db->select('t.id, t.privats, t.termins, st.name AS status_name, st.id AS status_id');
+        $this->db->select('sa.name AS sadala_name, sa.id AS sadala_id, cl.name AS clients_name, cl.id AS clients_id');
+        $this->db->select('li.name AS lieta_name, li.id AS lieta_id, pr.name AS pr_name, pr.id AS pr_id');
         $this->db->from('tasks AS t');
         $this->db->join('status AS st', 'st.id = t.status', 'left');
         $this->db->join('sadala AS sa', 'sa.id = t.sadala', 'left');

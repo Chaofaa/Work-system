@@ -25,7 +25,7 @@ class Users extends CI_Controller {
             $data['page']['title'] = 'Lietotaji';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/user.php', $data);
+            $this->load->view('users/user.php', $data);
             $this->load->view('footer.php', $data);
 
         }     
@@ -78,7 +78,7 @@ class Users extends CI_Controller {
             $data['page']['title'] = 'Pievienot lietotaju';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/add_user.php', $data);
+            $this->load->view('users/add_user.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -132,7 +132,7 @@ class Users extends CI_Controller {
             $data['page']['title'] = 'Izmainit lietotaju';
 
             $this->load->view('header.php', $data);
-            $this->load->view('document/change_user.php', $data);
+            $this->load->view('users/change_user.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -185,7 +185,7 @@ class Users extends CI_Controller {
             $data['page']['title'] = 'Parole mainišana';
 
             $this->load->view('header.php', $data);
-            $this->load->view('document/new_password.php', $data);
+            $this->load->view('users/new_password.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -241,7 +241,7 @@ class Users extends CI_Controller {
         $data['page']['title'] = 'Savus datus mainišana';
 
         $this->load->view('header.php', $data);
-        $this->load->view('document/personal_data.php', $data);
+        $this->load->view('users/personal_data.php', $data);
         $this->load->view('footer.php', $data);
     }
 

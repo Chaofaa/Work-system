@@ -26,7 +26,7 @@ class Clients extends CI_Controller {
             $data['page']['title'] = 'Clienti';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/clients.php', $data);
+            $this->load->view('clients/clients.php', $data);
             $this->load->view('footer.php', $data);
         }    
        
@@ -74,7 +74,7 @@ class Clients extends CI_Controller {
             $data['page']['title'] = 'Clientu mainišana';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/client_change.php', $data);
+            $this->load->view('clients/client_change.php', $data);
             $this->load->view('footer.php', $data);
         }    
     }
@@ -119,7 +119,7 @@ class Clients extends CI_Controller {
             $data['page']['title'] = 'Jaunu clientu pievienošana';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/client_add.php', $data);
+            $this->load->view('clients/client_add.php', $data);
             $this->load->view('footer.php', $data);
         }    
     }

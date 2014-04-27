@@ -6,8 +6,8 @@ class Tasks extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('ion_auth');
-                $this->load->model('main');
-                $this->load->model('tasks_model');
+        $this->load->model('main');
+        $this->load->model('tasks_model');
 	}
         
     public function index()
@@ -29,7 +29,7 @@ class Tasks extends CI_Controller {
             $data['page']['title'] = 'Uzdevumi';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/tasks.php', $data);
+            $this->load->view('tasks/tasks.php', $data);
             $this->load->view('footer.php', $data);
 
         }
@@ -94,7 +94,7 @@ class Tasks extends CI_Controller {
             $data['page']['title'] = 'Jaunu uzdevumu pievinošana';
 
             $this->load->view('header.php', $data);
-            $this->load->view('document/tasks_add.php', $data);
+            $this->load->view('tasks/tasks_add.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -165,7 +165,7 @@ class Tasks extends CI_Controller {
             $data['page']['title'] = 'Uzdevumu rediģešana';
 
             $this->load->view('header.php', $data);
-            $this->load->view('document/tasks_update.php', $data);
+            $this->load->view('tasks/tasks_update.php', $data);
             $this->load->view('footer.php', $data);  
 
         }      
@@ -179,7 +179,7 @@ class Tasks extends CI_Controller {
 
         $data['user'] = $this->ion_auth->user()->row();
 
-        $data['task'] = $this->main->getDataById('tasks', $id);
+        $data['task'] = $this->tasks_model->getTasks($id);
         $data['main_user'] = $this->tasks_model->task_users($id, 2);
         $task_users = $this->tasks_model->task_users($id);
         if(!empty($task_users)){
@@ -200,7 +200,7 @@ class Tasks extends CI_Controller {
         $data['page']['title'] = 'Uzdevumu dati';
 
         $this->load->view('header.php', $data);
-        $this->load->view('document/task_view.php', $data);
+        $this->load->view('tasks/task_view.php', $data);
         $this->load->view('footer.php', $data); 
     }
 
@@ -266,7 +266,7 @@ class Tasks extends CI_Controller {
         $data['page']['title'] = 'Mani uzdevumi';
 
         $this->load->view('header.php', $data);
-        $this->load->view('document/user_tasks.php', $data);
+        $this->load->view('tasks/user_tasks.php', $data);
         $this->load->view('footer.php', $data);
     }
 
@@ -296,8 +296,10 @@ class Tasks extends CI_Controller {
         } 
 
         $data['user'] = $this->ion_auth->user()->row();
+
+        $data['task'] = $this->tasks_model->getTasks($id);
         
-        $data['task'] = $this->main->getDataById('tasks', $id);
+        //$data['task'] = $this->main->getDataById('tasks', $id);
         $data['main_user'] = $this->tasks_model->task_users($id, 2);
         $task_users = $this->tasks_model->task_users($id);
         foreach($task_users as $k => $v){
@@ -306,15 +308,11 @@ class Tasks extends CI_Controller {
         $data['users_number'] = count($data['task_users']);
         $data['users'] = $this->main->getAll('users', array('by' => 'first_name', 'order' => 'desc'));
         $data['status'] = $this->main->getAll('status', array('by' => 'name', 'order' => 'desc'));
-        $data['prioritate'] = $this->main->getAll('prioritate', array('by' => 'name', 'order' => 'desc'));
-        $data['sadala'] = $this->main->getAll('sadala', array('by' => 'name', 'order' => 'desc'));
-        $data['clients'] = $this->main->getAll('clients', array('by' => 'id', 'order' => 'desc'));
-        $data['lieta'] = $this->main->getAll('lieta', array('by' => 'name', 'order' => 'desc'));
 
         $data['page']['title'] = $data['task']->name;
 
         $this->load->view('header.php', $data);
-        $this->load->view('document/task_users.php', $data);
+        $this->load->view('tasks/task_users.php', $data);
         $this->load->view('footer.php', $data);
     }
 

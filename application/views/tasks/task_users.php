@@ -12,20 +12,20 @@
                 <? if($user->id == $main_user->id){ ?>
                   <select name="status" class="form-control">
                   <? foreach($status as $status_row){ ?>
-                      <option value="<?= $status_row->id; ?>" <?= (($status_row->id == $task->status)?'selected="selected"':'') ?>><?= $status_row->name; ?></option>
+                      <option value="<?= $status_row->id; ?>" <?= (($status_row->id == $task->status_id)?'selected="selected"':'') ?>><?= $status_row->name; ?></option>
                   <? } ?>
                   </select>
                 <? }else{ ?>
-                  <div class="well well-sm"><?= $this->main->getDataById('status', $task->status)->name; ?></div>
+                  <div class="well well-sm"><?= $task->status_name; ?></div>
                 <? } ?>      
               </div>
               <div class="form-group">
                 <label for="termins">Termiņš</label>
-                <div class="well well-sm"><?= (($task->termins)?$task->termins:''); ?></div>
+                <div class="well well-sm"><?= $this->main->Date($task->termins); ?></div>
               </div>
               <div class="form-group">
                 <label for="prioritate">Prioritate</label>
-                <div class="well well-sm"><?= $this->main->getDataById('prioritate', $task->prioritate)->name; ?></div>
+                <div class="well well-sm"><?= $task->pr_name; ?></div>
               </div>
               <div class="form-group">
                 <label>Galvenais Darbinieks</label>
@@ -50,26 +50,26 @@
               </div> 
               <div class="form-group">
                 <label for="sadala">Sadaļa</label>
-                <div class="well well-sm"><?= $this->main->getDataById('sadala', $task->sadala)->name; ?></div> 
+                <div class="well well-sm"><?= $task->sadala_name; ?></div> 
               </div>
               <div class="form-group">
                 <label for="klients">Klients</label>
-                <div class="well well-sm"><?= $this->main->getDataById('clients', $task->klients)->name; ?></div>
+                <div class="well well-sm"><?= $task->clients_name; ?></div>
               </div>
               <div class="form-group">
                 <label for="lieta">Lieta</label>
-                <div class="well well-sm"><?= $this->main->getDataById('lieta', $task->lieta)->name; ?></div>
+                <div class="well well-sm"><?= $task->lieta_name; ?></div>
               </div>
               <div class="form-group">
                 <label for="uzdevums">Uzdevums</label>
-                <div class="well well-sm"><?= (($task->uzdevums)?$task->uzdevums:''); ?></div>
+                <div class="well well-sm"><?= $task->uzdevums; ?></div>
               </div>
               <div class="form-group">
                 <label for="uzdevums">Izpildes gaita</label>
                 <? if($user->id == $main_user->id){ ?>
-                  <textarea id="editor" name="izpildes_gaita"><?= (($task->izpildes_gaita)?$task->izpildes_gaita:'') ?></textarea>
+                  <textarea id="editor" name="izpildes_gaita"><?= $task->izpildes_gaita; ?></textarea>
                 <? }else{ ?>
-                  <div class="well well-sm"><?= (($task->izpildes_gaita)?$task->izpildes_gaita:'') ?></div>
+                  <div class="well well-sm"><?= $task->izpildes_gaita; ?></div>
                 <? } ?>
               </div>
               <? if($user->id == $main_user->id){ ?>

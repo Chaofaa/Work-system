@@ -19,8 +19,9 @@
                       <? foreach($tasks as $row){ ?>	
                           <a href="<?= base_url(); ?>tasks/open/<?= $row->id; ?>" class="list-group-item">
                               <span class="badge"><?= $row->status_name; ?></span>
-                              <span class="badge"><?= $row->termins; ?></span>
+                              <span class="badge"><?= $this->main->Date($row->termins); ?></span>
                               <span class="badge"><?= $row->clients_name; ?></span>
+                              <span class="badge"><?= $row->sadala_name; ?></span>
                             <h4 class="list-group-item-heading"><?= $row->name; ?></h4>
                             <p><b>Uzdevums: </b><?= $row->uzdevums; ?></p>
                             <? if($row->izpildes_gaita){ ?><p><b>Izpildes gaita: </b><?= $row->izpildes_gaita; ?></p><? } ?>

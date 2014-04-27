@@ -35,7 +35,7 @@ class Atskaite extends CI_Controller {
         $data['page']['title'] = 'Darba laika uzskaite';
         
         $this->load->view('header.php', $data);
-        $this->load->view('document/user_atskaite.php', $data);
+        $this->load->view('atskaite/user_atskaite.php', $data);
         $this->load->view('footer.php', $data);
     }
     
@@ -98,7 +98,7 @@ class Atskaite extends CI_Controller {
         $data['page']['title'] = 'Jaunu atskaite pievienošana';
         
         $this->load->view('header.php', $data);
-        $this->load->view('document/atskaite_add.php', $data);
+        $this->load->view('atskaite/atskaite_add.php', $data);
         $this->load->view('footer.php', $data);
     }    
     
@@ -163,7 +163,7 @@ class Atskaite extends CI_Controller {
         $data['page']['title'] = 'Atskaite rediģešana';
         
         $this->load->view('header.php', $data);
-        $this->load->view('document/atskaite_update.php', $data);
+        $this->load->view('atskaite/atskaite_update.php', $data);
         $this->load->view('footer.php', $data);
     }
     
@@ -227,7 +227,7 @@ class Atskaite extends CI_Controller {
             $data['page']['title'] = 'Darba laika uzskaite';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/atskaite_klientam.php', $data);
+            $this->load->view('atskaite/atskaite_klientam.php', $data);
             $this->load->view('footer.php', $data);
         }
     }
@@ -261,7 +261,7 @@ class Atskaite extends CI_Controller {
             $data['page']['title'] = 'Darba laika uzskaite';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/atskaite_darbiniekiem.php', $data);
+            $this->load->view('atskaite/atskaite_darbiniekiem.php', $data);
             $this->load->view('footer.php', $data);
         }    
     }

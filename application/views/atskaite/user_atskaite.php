@@ -51,8 +51,10 @@
         </form>
       </div>
       <div class="row">
+          <? if($this->ion_auth->is_admin()){ ?>
           <a href="<?= base_url(); ?>invoice/createPDFsmall/all" class="btn btn-default link-button-left">Īsais rēķins</a>
           <a href="<?= base_url(); ?>invoice/createPDFbig/all" class="btn btn-default link-button-left">Garais rēķins</a>
+          <? } ?>
           <a href="<?= base_url(); ?>atskaite/excel/main" class="btn btn-default link-button-left">Export to Excel</a>
       </div>
       <div class="table-responsive">

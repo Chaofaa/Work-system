@@ -29,28 +29,7 @@ class Settings extends CI_Controller {
             $data['page']['title'] = 'Iestatijumi';
 
             $this->load->view('header.php', $data);
-            $this->load->view('document/settings.php', $data);
-            $this->load->view('footer.php', $data);
-
-        }    
-    }
-
-    public function add_piegadatajs() {
-
-        if (!$this->ion_auth->logged_in()) {
-            redirect('login');
-        }
-
-        if(!$this->ion_auth->is_admin()){
-            $this->error();
-        }else{
-        
-            $data['user'] = $this->ion_auth->user()->row();
-
-            $data['page']['title'] = 'Pievienot jaunu Piegādātāju';
-            
-            $this->load->view('header.php', $data);
-            $this->load->view('document/settings_piegadatajs.php', $data);
+            $this->load->view('settings.php', $data);
             $this->load->view('footer.php', $data);
 
         }    

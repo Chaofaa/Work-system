@@ -34,31 +34,31 @@
           </div>  
           <div class="form-group">
             <label for="sadala">Sadaļa</label>
-            <div class="well well-sm"><?= $this->main->getDataById('sadala', $task->sadala)->name; ?></div> 
+            <div class="well well-sm"><?= $task->sadala_name; ?></div> 
           </div>
           <div class="form-group">
             <label for="klients">Klients</label>
-            <div class="well well-sm"><?= $this->main->getDataById('clients', $task->klients)->name; ?></div>
+            <div class="well well-sm"><?= $task->clients_name; ?></div>
           </div>
           <div class="form-group">
             <label for="lieta">Lieta</label>
-            <div class="well well-sm"><?= $this->main->getDataById('lieta', $task->lieta)->name; ?></div>
+            <div class="well well-sm"><?= $task->lieta_name; ?></div>
           </div>
           <div class="form-group">
             <label for="uzdevums">Uzdevums</label>
-            <div class="well well-sm"><?= (($task->uzdevums)?$task->uzdevums:''); ?></div>
+            <div class="well well-sm"><?= $task->uzdevums; ?></div>
           </div>
           <div class="form-group">
             <label for="uzdevums">Izpildes gaita</label>
-            <div class="well well-sm"><?= (($task->izpildes_gaita)?$task->izpildes_gaita:''); ?></div>
+            <div class="well well-sm"><?= $task->izpildes_gaita; ?></div>
           </div>
           <div class="form-group">
             <label for="status">Status</label>
-            <div class="well well-sm"><?= $this->main->getDataById('status', $task->status)->name; ?></div>
+            <div class="well well-sm"><?= $task->status_name; ?></div>
           </div>
           <div class="form-group">
             <label for="prioritate">Prioritate</label>
-            <div class="well well-sm"><?= $this->main->getDataById('prioritate', $task->prioritate)->name; ?></div>
+            <div class="well well-sm"><?= $task->pr_name; ?></div>
           </div>
           <div class="form-group">
             <label for="privats">Privats</label>
@@ -68,7 +68,7 @@
           </div>
           <div class="form-group">
             <label for="termins">Termiņš</label>
-            <div class="well well-sm"><?= (($task->termins)?$task->termins:''); ?></div>
+            <div class="well well-sm"><?= (($task->termins)?$this->main->Date($task->termins):''); ?></div>
           </div>
         </div>
       </div>

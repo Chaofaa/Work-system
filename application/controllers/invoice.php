@@ -30,7 +30,7 @@ class Invoice extends CI_Controller {
             $data['page']['title'] = 'Visi Reķiņi';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/invoice.php', $data);
+            $this->load->view('invoice/invoice.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -139,7 +139,7 @@ class Invoice extends CI_Controller {
             $data['data_list'] = $this->invoice_model->listData($id);
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/invoice_update.php', $data);
+            $this->load->view('invoice/invoice_update.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -168,7 +168,7 @@ class Invoice extends CI_Controller {
             $data['data_list'] = $this->invoice_model->listData($id);
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/invoice_update_small.php', $data);
+            $this->load->view('invoice/invoice_update_small.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -243,7 +243,7 @@ class Invoice extends CI_Controller {
         }else{
 
             $data['klients'] = $this->main->getDataById('clients', $id);
-            $this->load->view('document/ajax_klients.php', $data);
+            $this->load->view('klients/ajax_klients.php', $data);
 
         }    
     } 

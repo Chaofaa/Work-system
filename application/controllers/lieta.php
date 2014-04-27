@@ -26,7 +26,7 @@ class Lieta extends CI_Controller {
             $data['page']['title'] = 'Lieta';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/lieta.php', $data);
+            $this->load->view('lieta/lieta.php', $data);
             $this->load->view('footer.php', $data);
 
         }    
@@ -65,7 +65,7 @@ class Lieta extends CI_Controller {
             $data['lieta'] = $this->main->getDataById('lieta', $id);
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/lieta_change.php', $data);
+            $this->load->view('lieta/lieta_change.php', $data);
             $this->load->view('footer.php', $data);
         }    
     }
@@ -101,7 +101,7 @@ class Lieta extends CI_Controller {
             $data['page']['title'] = 'Lieta pievinošana';
             
             $this->load->view('header.php', $data);
-            $this->load->view('document/lieta_add.php', $data);
+            $this->load->view('lieta/lieta_add.php', $data);
             $this->load->view('footer.php', $data);
         }    
     }
