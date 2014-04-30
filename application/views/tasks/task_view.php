@@ -14,7 +14,11 @@
           <div class="form-group">
             <label>Galvenais Darbinieks</label>
             <div class="well well-sm">
-              <?= $main_user->first_name; ?>&nbsp;<?= $main_user->last_name; ?>
+              <? if($main_user){ ?>
+                <?= $main_user->first_name; ?>&nbsp;<?= $main_user->last_name; ?>
+              <? }else{ ?>
+                Nāv izvelets gālv. darbinieks
+              <? } ?>  
             </div>
           </div>  
           <div class="form-group">

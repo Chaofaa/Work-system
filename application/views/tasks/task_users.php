@@ -30,13 +30,17 @@
               <div class="form-group">
                 <label>Galvenais Darbinieks</label>
                 <div class="well well-sm">
-                  <?= $main_user->first_name; ?>&nbsp;<?= $main_user->last_name; ?>
+                  <? if($main_user){ ?>
+                    <?= $main_user->first_name; ?>&nbsp;<?= $main_user->last_name; ?>
+                  <? }else{ ?>
+                    Nāv izvelets gālv. darbinieks
+                  <? } ?>
                 </div>
               </div> 
               <div class="form-group">
                 <label>Darbinieki</label>
                   <div class="well well-sm">
-                  <? if($task_users){ ?>
+                  <? if(isset($task_users)){ ?>
                     <? foreach($users as $users_row){ ?>
                       <? if(in_array($users_row->id, $task_users)){ ?>
                         <? $users_number--; ?>

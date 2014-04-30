@@ -19,7 +19,7 @@
             <label>Galvenais Darbinieks*</label>
             <select name="main_user" class="form-control" require>
               <? foreach($users as $v){ ?>
-              <option value="<?= $v->id; ?>" <?= (($main_user->user_id == $v->id)?'selected="selected"':''); ?> ><?= $v->first_name; ?>&nbsp;<?= $v->last_name; ?></option>
+              <option value="<?= $v->id; ?>" <?= ((($main_user) && $main_user->user_id == $v->id)?'selected="selected"':''); ?> ><?= $v->first_name; ?>&nbsp;<?= $v->last_name; ?></option>
               <? } ?>
             </select>
           </div>  
@@ -27,7 +27,7 @@
             <label>Darbinieki*</label>
             <select id="users" name="users[]" multiple="multiple" data-placeholder="Select Users" require>
               <? foreach($users as $users_row){ ?>
-              <option value="<?= $users_row->id; ?>" <?= ((in_array($users_row->id, $task_users))?'selected="selected"':''); ?> ><?= $users_row->first_name ?>&nbsp;<?= $users_row->last_name; ?></option>
+              <option value="<?= $users_row->id; ?>" <?= ((isset($task_users) && in_array($users_row->id, $task_users))?'selected="selected"':''); ?> ><?= $users_row->first_name ?>&nbsp;<?= $users_row->last_name; ?></option>
               <? } ?>
             </select>
           </div>  
@@ -41,8 +41,8 @@
             </select>
       		</div>
           <div class="form-group">
-            <label for="klients">Klients</label>
-            <select name="klients" id="klients" class="form-control">
+            <label for="klients">Klients*</label>
+            <select name="klients" id="klients" class="form-control" require>
               <option>Izvelies Klientu</option>
               <? foreach($clients as $clients_row){ ?>
               <option value="<?= $clients_row->id; ?>" <?= (($task->klients == $clients_row->id)?'selected="selected"':''); ?> ><?= $clients_row->name; ?></option>
@@ -50,8 +50,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="lieta">Lieta</label>
-            <select name="lieta" id="lieta" class="form-control">
+            <label for="lieta">Lieta*</label>
+            <select name="lieta" id="lieta" class="form-control" require>
               <option>Izvelies Lietu</option>
               <? foreach($lieta as $lieta_row){ ?>
               <option value="<?= $lieta_row->id; ?>" <?= (($task->lieta == $lieta_row->id)?'selected="selected"':''); ?>><?= $lieta_row->name; ?></option>
@@ -59,12 +59,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="uzdevums">Uzdevums</label>
-            <textarea id="editor" name="uzdevums"><?= (($task->uzdevums)?$task->uzdevums:''); ?></textarea>
+            <label for="uzdevums">Uzdevums*</label>
+            <textarea id="editor" name="uzdevums" require><?= (($task->uzdevums)?$task->uzdevums:''); ?></textarea>
           </div>
           <div class="form-group">
-            <label for="status">Status</label>
-            <select name="status" id="status" class="form-control">
+            <label for="status">Status*</label>
+            <select name="status" id="status" class="form-control" require>
               <option>Izvelies Status</option>
               <? foreach($status as $status_row){ ?>
               <option value="<?= $status_row->id; ?>" <?= (($task->status == $status_row->id)?'selected="selected"':''); ?>><?= $status_row->name; ?></option>
@@ -72,8 +72,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="prioritate">Prioritate</label>
-            <select name="prioritate" id="prioritate" class="form-control">
+            <label for="prioritate">Prioritate*</label>
+            <select name="prioritate" id="prioritate" class="form-control" require>
               <option>Izvelies Prioritate</option>
               <? foreach($prioritate as $prioritate_row){ ?>
               <option value="<?= $prioritate_row->id; ?>" <?= (($task->prioritate == $prioritate_row->id)?'selected="selected"':''); ?> ><?= $prioritate_row->name; ?></option>
@@ -81,8 +81,8 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="privats">Privats</label>
-            <select name="privats" id="privats" class="form-control">
+            <label for="privats">Privats*</label>
+            <select name="privats" id="privats" class="form-control" require>
               <option>Izvelies Privats</option>
               <option value="Yes" <?= (($task->privats == 'Yes')?'selected="selected"':''); ?>>Yes</option>
               <option value="No" <?= (($task->privats == 'No')?'selected="selected"':''); ?>>No</option>

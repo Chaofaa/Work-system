@@ -34,15 +34,6 @@
             </div>
             <div class="row">
                 <div class="left-block">
-                    <br />
-                    <select name="me" class="form-control">
-                        <option value="0">Piegadatajs</option>
-                    </select>
-                    <br />
-                </div>
-            </div>    
-            <div class="row">
-                <div class="left-block">
                     <p class="text-left">
                         Pakalpojuma sniedzējs:<br /> 
                         PVN Reģ.Nr.: <br />

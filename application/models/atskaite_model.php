@@ -45,7 +45,7 @@ class Atskaite_model extends CI_Model  {
         if($limit){
             $this->db->limit($limit);
         }
-        $this->db->order_by('datums', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $this->db->distinct();
         $this->db->select('u.datums, u.apraksts, u.time, u.piezimes');
         $this->db->select('u.id, u.papildus_izmaksas, us.first_name, us.last_name');
@@ -88,7 +88,7 @@ class Atskaite_model extends CI_Model  {
             $this->db->where($filter_data);
         }
         
-        $this->db->order_by('datums', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $this->db->distinct();
         $this->db->select('u.datums, u.apraksts, u.time, u.piezimes');
         $this->db->select('u.id, u.papildus_izmaksas, us.first_name, us.last_name');
@@ -131,7 +131,7 @@ class Atskaite_model extends CI_Model  {
             $this->db->where($filter_data);
         }
         
-        $this->db->order_by('datums', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $this->db->distinct();
         $this->db->select('u.datums, u.apraksts, u.time, u.piezimes');
         $this->db->select('u.id, u.papildus_izmaksas, us.first_name, us.last_name');

@@ -110,6 +110,8 @@
                         <td colspan="9">Nekas nav pievienots.</td>
                     </tr>
                     <? } ?>
+                </tbody>  
+                <tfoot>  
                     <tr>
                         <td></td>
                         <td></td>
@@ -122,7 +124,7 @@
                         <td class="info">Kopā: <?= $izmaksas ?>EUR</td>
                         <td></td>
                     </tr>
-        	</tbody>
+                </tfoot>    
         </table>
       </div>
     </div>

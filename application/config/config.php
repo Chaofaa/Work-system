@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://jadavirtual.lv/project/legal_tax/';
-//$config['base_url'] = '';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------

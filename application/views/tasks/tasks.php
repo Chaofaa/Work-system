@@ -41,7 +41,7 @@
                 <input type="text" name="no-datums" placeholder="Pievienošanas datums" class="form-control date-time-picker" value="<?= (($filter_data['no-datums'])?$filter_data['no-datums']:''); ?>" />
                 <input type="text" name="lidz-datums" placeholder="Termiņš" class="form-control date-time-picker" value="<?= (($filter_data['lidz-datums'])?$filter_data['lidz-datums']:''); ?>" />
                 <input type="submit" class="btn btn-default" value="Filtret" />
-                <a href="<?= base_url() ?>tasks/filter_reset" class="btn btn-default link-button-left">Reset filter</a>
+                <a href="<?= base_url() ?>tasks/filter_reset/tasks" class="btn btn-default link-button-left">Reset filter</a>
             </div>
         </form>
       </div>	
@@ -71,11 +71,15 @@
             			<td><?= ++$i; ?></td>
             			<td><?= $row->name; ?></td>
                         <td>
+                            <? if($this->tasks_model->task_users($row->id, 2)){ ?>
                             <span class="label label-default">
                                 <?= $this->tasks_model->task_users($row->id, 2)->first_name; ?>
                                 &nbsp;
                                 <?= $this->tasks_model->task_users($row->id, 2)->last_name; ?>
                             </span>
+                            <? }else{ ?>
+                            Nav izvelēts gālv. darbinieks
+                            <? } ?>
                         </td>
             			<td>
                         <? 
@@ -84,8 +88,8 @@
                                 echo '<span class="label label-default">'.$v['first_name'].' '.$v['last_name'].'</span><br />';   
                             }
                         }else{
-                            echo 'Nav pievienots lietotajs';
-                        }    
+                            echo 'Nav pievienoti lietotaji';
+                        }   
                         ?>
                         </td>
                         <td><?= $row->sadala_name; ?></td>

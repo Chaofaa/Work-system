@@ -48,13 +48,13 @@ class Tasks extends CI_Controller {
             $this->form_validation->set_rules('name', 'Nosaukums', 'xss_clean|required');
             $this->form_validation->set_rules('main_user', 'Galvenais Darbinieks', 'xss_clean|required');
             $this->form_validation->set_rules('users', 'Users', 'xss_clean|required');
-            $this->form_validation->set_rules('sadala', 'Sadaļa', 'xss_clean|required');
-            $this->form_validation->set_rules('klients', 'Klients', 'xss_clean');
-            $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean');
-            $this->form_validation->set_rules('uzdevums', 'Uzdevums', 'xss_clean');
-            $this->form_validation->set_rules('status', 'status', 'xss_clean');
-            $this->form_validation->set_rules('prioritate', 'Prioritate', 'xss_clean');
-            $this->form_validation->set_rules('privats', 'Privats', 'xss_clean');
+            $this->form_validation->set_rules('sadala', 'Sadaļa', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('uzdevums', 'Uzdevums', 'xss_clean|required');
+            $this->form_validation->set_rules('status', 'status', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('prioritate', 'Prioritate', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('privats', 'Privats', 'xss_clean|alpha_numeric');
             $this->form_validation->set_rules('termins', 'Termiņš', 'xss_clean');
 
             if($this->form_validation->run() == true){
@@ -114,12 +114,12 @@ class Tasks extends CI_Controller {
             $this->form_validation->set_rules('main_user', 'Galvenais Darbinieks', 'xss_clean|required');
             $this->form_validation->set_rules('users', 'Users', 'xss_clean|required');
             $this->form_validation->set_rules('sadala', 'Sadaļa', 'xss_clean|required');
-            $this->form_validation->set_rules('klients', 'Klients', 'xss_clean');
-            $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean');
-            $this->form_validation->set_rules('uzdevums', 'Uzdevums', 'xss_clean');
-            $this->form_validation->set_rules('status', 'status', 'xss_clean');
-            $this->form_validation->set_rules('prioritate', 'Prioritate', 'xss_clean');
-            $this->form_validation->set_rules('privats', 'Privats', 'xss_clean');
+            $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('uzdevums', 'Uzdevums', 'xss_clean|required');
+            $this->form_validation->set_rules('status', 'status', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('prioritate', 'Prioritate', 'xss_clean|alpha_numeric');
+            $this->form_validation->set_rules('privats', 'Privats', 'xss_clean|alpha_numeric');
             $this->form_validation->set_rules('termins', 'Termiņš', 'xss_clean');
 
             if($this->form_validation->run() == true){
@@ -230,14 +230,19 @@ class Tasks extends CI_Controller {
         redirect('tasks');
     }
     
-    public function filter_reset()
+    public function filter_reset($type)
     {
         if (!$this->ion_auth->logged_in()){
             redirect('login');
         }
-        
-        $this->session->unset_userdata('t_filter');
-        redirect('tasks');
+
+        if($type == 'tasks'){
+            $this->session->unset_userdata('t_filter');
+            redirect('tasks');
+        }elseif($type == 'all'){
+            $this->session->unset_userdata('u_filter');
+            redirect('tasks/all');
+        }    
     }
     
     public function u_filter()
@@ -256,7 +261,8 @@ class Tasks extends CI_Controller {
             redirect('login');
         }
         
-        $data['filter'] = $this->session->userdata('u_filter');
+        $data['filter'] = $this->tasks_model->getTaskFilter();
+        $data['filter_data'] = $this->session->userdata('u_filter');
         
         $data['user'] = $this->ion_auth->user()->row();
         
@@ -286,7 +292,7 @@ class Tasks extends CI_Controller {
                                'izpildes_gaita' => $this->input->post('izpildes_gaita')
                                );
 
-            if($this->tasks_model->change_task($id ,$task_data)){
+            if($this->tasks_model->change_task($id, $task_data)){
                 $data['success'] = "Saglabats!";
             }
         }else{
@@ -302,10 +308,12 @@ class Tasks extends CI_Controller {
         //$data['task'] = $this->main->getDataById('tasks', $id);
         $data['main_user'] = $this->tasks_model->task_users($id, 2);
         $task_users = $this->tasks_model->task_users($id);
-        foreach($task_users as $k => $v){
-            $data['task_users'][] = $v['user_id']; 
+        if(!empty($task_user)){
+            foreach($task_users as $k => $v){
+                $data['task_users'][] = $v['user_id']; 
+            }
+            $data['users_number'] = count($data['task_users']);
         }
-        $data['users_number'] = count($data['task_users']);
         $data['users'] = $this->main->getAll('users', array('by' => 'first_name', 'order' => 'desc'));
         $data['status'] = $this->main->getAll('status', array('by' => 'name', 'order' => 'desc'));
 

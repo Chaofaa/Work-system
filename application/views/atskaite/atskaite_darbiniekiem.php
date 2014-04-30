@@ -58,13 +58,15 @@
                         <td colspan="9">Nekas nav pievienots.</td>
                     </tr>
                     <? } ?>
+        	</tbody>
+            <tfoot>
                     <tr>
                         <td></td>
                         <td class="info">Kopā: <?= $total_time ?> h</td>
                         <td class="info">Kopā: <?= $total_days ?> dienas</td>
                         <td class="info">Kopā: <?= $total_sum ?> h/diena</td>
                     </tr>
-        	</tbody>
+            </tfoot>
         </table>
       </div>
     </div>

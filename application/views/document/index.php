@@ -6,7 +6,7 @@
                 <? if(!empty($task_for_me)){ ?>
                   <? foreach($task_for_me as $task_for_me_row){ ?>  
                       <a href="<?= base_url(); ?>tasks/open/<?= $task_for_me_row->id; ?>" class="list-group-item">
-                          <span class="badge"><?= $this->main->Date($task_for_me_row->termins); ?></span>
+                          <span class="badge">Termiņš: <?= $this->main->Date($task_for_me_row->termins); ?></span>
                           <span class="badge"><?= $task_for_me_row->clients_name; ?></span>
                           <span class="badge"><?= $task_for_me_row->sadala_name; ?></span>
                         <h4 class="list-group-item-heading"><?= $task_for_me_row->name; ?></h4>
@@ -26,7 +26,7 @@
                 <? if(!empty($atskaite_for_me)){ ?>
                   <? foreach($atskaite_for_me as $atskaite_for_me_row){ ?>  
                       <a href="<?= base_url(); ?>atskaite/update/<?= $atskaite_for_me_row->id; ?>" class="list-group-item">
-                          <span class="badge"><?= $this->main->Date($atskaite_for_me_row->datums); ?></span>
+                          <span class="badge">Datums: <?= $this->main->Date($atskaite_for_me_row->datums); ?></span>
                           <span class="badge"><?= $atskaite_for_me_row->sadala_name; ?></span>
                           <span class="badge"><?= $atskaite_for_me_row->clients_name; ?></span>
                         <h4 class="list-group-item-heading"><?= $atskaite_for_me_row->lieta_name; ?></h4>

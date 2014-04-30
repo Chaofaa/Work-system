@@ -203,7 +203,7 @@ class Invoice extends CI_Controller {
         }else{
         
             $data['data'] = $this->main->getDataById('invoice',  $id);
-            $data['klients'] = $this->main->getDataById('clients', $data['data']->klients);
+            $data['klients'] = $this->main->getDataById('clients_dump', $data['data']->klients);
             $data['sum_text'] = $this->invoice_model->num2words($data['data']->sum_kopa);
             $data['data_list'] = $this->invoice_model->listData($id);
             
@@ -223,7 +223,7 @@ class Invoice extends CI_Controller {
         }else{
 
             $data['data'] = $this->main->getDataById('invoice',  $id);
-            $data['klients'] = $this->main->getDataById('clients', $data['data']->klients);
+            $data['klients'] = $this->main->getDataById('clients_dump', $data['data']->klients);
             $data['sum_text'] = $this->invoice_model->num2words($data['data']->sum_kopa);
             $data['data_list'] = $this->invoice_model->listData($id);
             

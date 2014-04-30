@@ -52,7 +52,6 @@ class Invoice_model extends CI_Model  {
         $main = array(
                      'rek_nr' => $data['f_nr'],
                      'rek_datums' => $data['f_datums'],
-                     'piegadatajs' => $data['me'],
                      'klients' => $data['klients'],
                      'kopa' => $data['kopa'],
                      'pvn' => $data['pvn'],
@@ -110,7 +109,6 @@ class Invoice_model extends CI_Model  {
         $main = array(
                      'rek_nr' => $data['f_nr'],
                      'rek_datums' => $data['f_datums'],
-                     'piegadatajs' => $data['me'],
                      'klients' => $data['klients'],
                      'kopa' => $data['kopa'],
                      'pvn' => $data['pvn'],

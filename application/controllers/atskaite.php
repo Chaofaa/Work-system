@@ -49,17 +49,17 @@ class Atskaite extends CI_Controller {
         $data['user'] = $this->ion_auth->user()->row();
         
         $this->form_validation->set_rules('datums', 'Datums', 'xss_clean|required');
-        $this->form_validation->set_rules('sadala', 'Sadala', 'xss_clean|required');
-        $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|required');
-        $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|required');
+        $this->form_validation->set_rules('sadala', 'Sadala', 'xss_clean|alpha_numeric');
+        $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|alpha_numeric');
+        $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|alpha_numeric');
         $this->form_validation->set_rules('apraksts', 'Apraksts', 'xss_clean');
-        $this->form_validation->set_rules('time', 'Izpildes laiks', 'xss_clean|required');
+        $this->form_validation->set_rules('time', 'Izpildes laiks', 'xss_clean|alpha_numeric');
         $this->form_validation->set_rules('piezimes', 'Piezumes', 'xss_clean');
         $this->form_validation->set_rules('izmaksas', 'Izmaksas', 'xss_clean');
         
         if($this->ion_auth->is_admin()){
             $data['users'] = $this->main->getAll('users', array('by' => 'first_name', 'order' => 'desc'));
-            $this->form_validation->set_rules('darbinieks', 'Darbinieks', 'xss_clean|required');
+            $this->form_validation->set_rules('darbinieks', 'Darbinieks', 'xss_clean|alpha_numeric');
         }    
         
         if($this->form_validation->run() == true){
@@ -112,17 +112,17 @@ class Atskaite extends CI_Controller {
         $data['user'] = $this->ion_auth->user()->row();
         
         $this->form_validation->set_rules('datums', 'Datums', 'xss_clean|required');
-        $this->form_validation->set_rules('sadala', 'Sadala', 'xss_clean|required');
-        $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|required');
-        $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|required');
+        $this->form_validation->set_rules('sadala', 'Sadala', 'xss_clean|alpha_numeric');
+        $this->form_validation->set_rules('klients', 'Klients', 'xss_clean|alpha_numeric');
+        $this->form_validation->set_rules('lieta', 'Lieta', 'xss_clean|alpha_numeric');
         $this->form_validation->set_rules('apraksts', 'Apraksts', 'xss_clean');
-        $this->form_validation->set_rules('time', 'Izpildes laiks', 'xss_clean|required');
+        $this->form_validation->set_rules('time', 'Izpildes laiks', 'xss_clean|alpha_numeric');
         $this->form_validation->set_rules('piezimes', 'Piezumes', 'xss_clean');
         $this->form_validation->set_rules('izmaksas', 'Izmaksas', 'xss_clean');
         
         if($this->ion_auth->is_admin()){
             $data['users'] = $this->main->getAll('users', array('by' => 'first_name', 'order' => 'desc'));
-            $this->form_validation->set_rules('darbinieks', 'Darbinieks', 'xss_clean|required');
+            $this->form_validation->set_rules('darbinieks', 'Darbinieks', 'xss_clean|alpha_numeric');
         }else{
             $data['users'] = $this->main->getDataById('users', $data['user']->id);
         }  
@@ -251,14 +251,15 @@ class Atskaite extends CI_Controller {
      
             $data['total_time'] = 0;
             $data['total_days'] = 0;
+            $data['total_sum'] = 0;
             if($data['atskaite']){
                 foreach($data['atskaite'] as $row){
                     $data['total_time'] += $row->total_time;
                     $data['total_days'] += $row->total_days;
                 }
+                $data['total_sum'] = $data['total_time']/$data['total_days'];
             }
-            $data['total_sum'] = $data['total_time']/$data['total_days'];
-            
+
             $data['page']['title'] = 'Darba laika uzskaite';
             
             $this->load->view('header.php', $data);

@@ -7,8 +7,23 @@ class Tasks_model extends CI_Model  {
     }
 
     
-    public function getTaskFilter($name = false)
+    public function getTaskFilter($id_person = false, $name = false)
     {
+        if($id_person){
+            $this->db->select('task_id');
+            $this->db->where('user_id', $id_person);
+            $task = $this->db->get('task_users');
+
+            if($task->num_rows() > 0){
+                $array = array();
+                foreach($task->result() as $row){
+                    $array[] = $row->task_id;
+                }
+                $this->db->where_in('t.id', $array);
+
+            }
+        }    
+
         $tasks = $this->db->get('tasks');
         $number = count($tasks->result_array());
         $tasks = $tasks->result();
@@ -77,11 +92,11 @@ class Tasks_model extends CI_Model  {
                     break;
                 default:
                     $result = array(
-                                    'status' => $this->getTaskFilter('status'),
-                                    'prioritate' => $this->getTaskFilter('prioritate'),
-                                    'lieta' => $this->getTaskFilter('lieta'),
-                                    'clients' => $this->getTaskFilter('clients'),
-                                    'sadala' => $this->getTaskFilter('sadala')
+                                    'status' => $this->getTaskFilter($id_person, 'status'),
+                                    'prioritate' => $this->getTaskFilter($id_person, 'prioritate'),
+                                    'lieta' => $this->getTaskFilter($id_person, 'lieta'),
+                                    'clients' => $this->getTaskFilter($id_person, 'clients'),
+                                    'sadala' => $this->getTaskFilter($id_person, 'sadala')
                                     );
                     
                     return $result;
@@ -119,15 +134,15 @@ class Tasks_model extends CI_Model  {
         }
     }
 
-    public function change_task($id, $data, $main_user, $users = false)
+    public function change_task($id, $data, $main_user = false, $users = false)
     {
         $this->db->where('id', $id);
         $this->db->update('tasks', $data);
 
-        $this->db->where('task_id', $id);
-        $this->db->delete('task_users');
-
         if(isset($main_user) && !empty($main_user)){
+            $this->db->where('task_id', $id);
+            $this->db->where('type', '2');
+            $this->db->delete('task_users');
             $this->db->set('task_id', $id);
             $this->db->set('user_id', $main_user);
             $this->db->set('type', '2');
@@ -135,6 +150,9 @@ class Tasks_model extends CI_Model  {
         }
 
         if(isset($users) && !empty($users)){
+            $this->db->where('task_id', $id);
+            $this->db->where('type', '1');
+            $this->db->delete('task_users');
             foreach($users as $k => $v){
                 $this->db->set('task_id', $id);
                 $this->db->set('user_id', $v);
@@ -183,7 +201,7 @@ class Tasks_model extends CI_Model  {
             $this->db->where($filter_data);
         }
 
-        $this->db->order_by('add_date', 'DESC');
+        $this->db->order_by('id', 'DESC');
         $this->db->distinct();
         $this->db->select('t.name, t.uzdevums, t.izpildes_gaita, t.add_date');
         $this->db->select('t.id, t.privats, t.termins, st.name AS status_name, st.id AS status_id');
@@ -226,13 +244,19 @@ class Tasks_model extends CI_Model  {
                 if($session['status']){
                     $this->db->where('st.id', $session['status']);
                 }
+                if($session['clients']){
+                    $this->db->where('cl.id', $session['clients']);
+                }
+                if($session['sadala']){
+                    $this->db->where('sa.id', $session['sadala']);
+                }
             }
 
             if($limit){
                 $this->db->limit($limit);
             }
 
-            $this->db->order_by('add_date', 'DESC');
+            $this->db->order_by('id', 'DESC');
             $this->db->distinct();
             $this->db->select('t.name, t.uzdevums, t.izpildes_gaita, t.add_date');
             $this->db->select('t.id, t.privats, t.termins, st.name AS status_name');

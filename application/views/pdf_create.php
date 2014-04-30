@@ -31,16 +31,7 @@
                     <label>Datums:</label>
                     <input type="text" name="f_datums" class="form-control datepicker" value="<?= date('Y-m-d'); ?>" />
                 </div>
-            </div>
-            <div class="row">
-                <div class="left-block">
-                    <br />
-                    <select name="me" class="form-control">
-                        <option value="0">Piegadatajs</option>
-                    </select>
-                    <br />
-                </div>
-            </div>    
+            </div>   
             <div class="row">
                 <div class="left-block">
                     <p class="text-left">
